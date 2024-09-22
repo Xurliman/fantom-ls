@@ -14,7 +14,6 @@ services:
       dockerfile: ./deploy/Dockerfile
     volumes:
       - license_app:/var/www/fantom-ls/storage/app
-#      - fantom-license-cc_license_cc:/content
     environment:
       DB_CONNECTION: ${DB_CONNECTION}
       DB_HOST: license-database
@@ -43,21 +42,14 @@ services:
       volumes:
           - license_database:/var/lib/mysql
       healthcheck:
-#        test: ['CMD', 'mariadb', '${DB_DATABASE}', '-h', 'localhost', '--password=${DB_PASSWORD}', '-u', '${DB_USERNAME}']
         test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
         timeout: 20s
         retries: 10
       networks:
         -   n-license
-#      ports:
-#        - "3306:3306"
-#      extra_hosts:
-#        - "host.docker.internal:host-gateway"
 volumes:
   license_app: {}
   license_database: {}
-#  fantom-license-cc_license_cc:
-#    external: true
 
 networks:
   n-license:
