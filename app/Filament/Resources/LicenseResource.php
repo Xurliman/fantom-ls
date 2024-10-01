@@ -36,7 +36,9 @@ class LicenseResource extends Resource
                         'inactive' => 'Inactive',
                     ])
                     ->required(),
-                Forms\Components\DateTimePicker::make('expires_at'),
+                Forms\Components\DateTimePicker::make('expires_at')
+                    ->after(now())
+                    ->required(),
             ]);
     }
 
